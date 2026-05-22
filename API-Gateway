@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+  spring:
+    application :
+      name : API-GATEWAY
+
+cloud:
+  gateway:
+    routes:
+      - id:  USER-SERVICE
+        uri: lb://USER-SERVICE
+#        lb => load balance
+
+        predicates :
+          -Path=/users/**
+# Apply this route only for /users/... requuests
+
+      - id : ORDER-SERVICE
+        uri : lb://ORDER-SERVICE
+        predicates:
+          -Path=/orders/**
+
+# Connect to the Eureka Server running at http://localhost:8761/eureka.”
+
+eureka :
+  client :
+    service- url :
+      default-zone :  http://localhost:8761/eureka
+
+
+# “Make all Actuator endpoints accessible through browser/API.”
+
+
+zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+
