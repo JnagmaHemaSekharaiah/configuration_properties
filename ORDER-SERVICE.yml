@@ -20,6 +20,6 @@ zipkin:
     endpoint: http://localhost:9411/api/v2/spans
 
     message:
-  text: User Service Running
+  text: Order Service Running From Config Server
 
     
